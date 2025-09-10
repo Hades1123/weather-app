@@ -1,6 +1,7 @@
 .city-weather {
     display: grid;
     grid-template-columns: 4fr 2fr;
+    gap: 2rem;
 
     .city-weather__left {
         .city-name {

@@ -1,0 +1,19 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .dropdown {
+        position: relative;
+
+        .units {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: .3rem;
+            padding: .5rem 1rem;
+            background-color: var(--neutral-800);
+            border-radius: 8px;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import logo from 'assets/logo.svg'
 import dropdown from 'assets/icon-dropdown.svg'
 import units from 'assets/icon-units.svg'
+import './navbar.scss'
 
 export const NavBar = () => {
     return (

@@ -1,4 +1,5 @@
 import searchIcon from 'assets/icon-search.svg'
+import './search.scss'
 
 export const Search = () => {
     return (

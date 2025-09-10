@@ -1,0 +1,47 @@
+.search {
+    margin: 5rem auto;
+    text-align: center;
+    // width: fit-content;
+    position: relative;
+
+    h2 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .input-box {
+            position: relative;
+
+            input {
+                min-width: 520px;
+                width: 100%;
+                padding: .825rem 3rem;
+                border-radius: 10px;
+                background-color: var(--neutral-800);
+                border: none;
+                outline: none;
+            }
+
+            img {
+                position: absolute;
+                top: 45%;
+                left: 1rem;
+                transform: translateY(-50%);
+            }
+        }
+
+        button {
+            padding: .825rem 2rem;
+            border-radius: 10px;
+            border: none;
+            background-color: var(--blue-500);
+            cursor: pointer;
+        }
+    }
+}
