@@ -1,0 +1,210 @@
+.city-weather {
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+
+    .city-weather__left {
+        .city-name {
+            position: relative;
+
+            .city-bg-image {
+                max-width: 100%;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .city-name__body {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: absolute;
+                inset: 0;
+                padding: 0 2rem;
+
+                .body-left {
+
+                    .place {
+                        margin-bottom: 0.75rem;
+                        font-size: 1.75rem;
+                        font-weight: 700;
+                        line-height: 2.1rem;
+                    }
+
+                    .date {
+                        font-size: 1.125rem;
+                        font-weight: 500;
+                        line-height: 1.35rem;
+                    }
+                }
+
+                .body-right {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 7.5rem;
+                        height: auto;
+                    }
+
+                    span {
+                        font-size: 6rem;
+                        font-style: italic;
+                        font-weight: 600;
+                        line-height: 6rem;
+                        letter-spacing: -0.12rem;
+                    }
+                }
+            }
+        }
+
+        .weather__details {
+            margin-top: 2rem;
+
+            ul {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+
+                li {
+                    background-color: var(--neutral-800);
+                    padding: 1.25rem;
+                    border-radius: 0.75rem;
+                    border: 1px solid var(--colors-neutral-600, #3C3B5E);
+                    background: var(--colors-neutral-800, #262540);
+
+                    >div {
+                        h4 {
+                            color: var(--colors-neutral-200, #D4D3D9);
+                            font-size: 1.125rem;
+                            font-weight: 500;
+                            line-height: 1.35rem;
+                            margin-bottom: 1.5rem;
+                        }
+
+                        p {
+                            font-size: 2rem;
+                            font-weight: 300;
+                            line-height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .daily-forecast {
+            margin-top: 3rem;
+
+            h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.5rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .daily-forecast-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 1rem;
+                text-align: center;
+
+                li {
+                    padding: 1rem 0.625rem;
+                    min-height: 8.5rem;
+                    min-width: 5rem;
+                    border-radius: 0.75rem;
+                    border: 1px solid var(--colors-neutral-600, #3C3B5E);
+                    background: var(--colors-neutral-800, #262540);
+
+                    img {
+                        width: 3.75rem;
+                        height: auto;
+                    }
+
+                    .day-night {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+
+    .city-weather__right {
+        padding: 1.5rem;
+        border-radius: 1.25rem;
+        background: var(--colors-neutral-800, #262540);
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .hourly-dropdown {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                position: relative;
+
+                .hourly-chosen {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: .5rem;
+                    padding: .5rem;
+                    background-color: var(--neutral-800);
+                    border-radius: 8px;
+                    cursor: pointer;
+                }
+
+                .hourly-dropdown-menu {
+                    position: absolute;
+                    top: 110%;
+                    right: 0;
+                    visibility: hidden;
+
+                    &.show {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+
+        .hourly-temp {
+            li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1rem;
+                border-radius: 0.5rem;
+                border: 1px solid var(--colors-neutral-600, #3C3B5E);
+                background: var(--colors-neutral-700, #302F4A);
+                padding: .625rem .75rem;
+
+                .hour-left {
+                    display: flex;
+                    align-items: center;
+                    gap: .5rem;
+
+                    img {
+                        width: 2.5rem;
+                        height: auto;
+                    }
+                }
+
+                .hour-temp {
+                    span {
+                        font-size: .825rem;
+                    }
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
