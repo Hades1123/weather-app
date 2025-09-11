@@ -13,13 +13,21 @@ import { useEffect, useState } from 'react'
 import { fetchData } from '@/services/api'
 import './main.scss'
 import { getDay } from '@/utils/helper'
+import type { TCurrentUnits, TUnits } from '@/App'
 
-export const Main = () => {
+interface IProps {
+    currentUnits: TCurrentUnits;
+    convertUnits: (unit: TUnits, v: number) => string;
+}
+
+export const Main = (props: IProps) => {
     const [isHourlyOpen, setIsHourlyOpen] = useState(false);
     const [currentData, setCurrenData] = useState<IResponse | null>(null);
     const [currentDay, setCurrentDay] = useState("");
     const [currentRightDay, setCurrentRightDay] = useState<number>(0);
     const [listOfDays, setListOfDays] = useState<{ day: string, index: number }[]>([]);
+
+    const { currentUnits, convertUnits } = props;
 
     const weatherIcons: Record<number, string> = {
         0: sunny,                // Clear sky
@@ -37,7 +45,7 @@ export const Main = () => {
 
     useEffect(() => {
         fetchData().then(data => {
-            const _currentDay = getDay(data.current_weather.time.toString(), data.timezone);
+            const _currentDay = getDay(data.current.time.toString(), data.timezone);
             setCurrenData(data);
             setCurrentDay(_currentDay);
             console.log(data);
@@ -92,25 +100,25 @@ export const Main = () => {
                             <li>
                                 <div>
                                     <h4>Feels Like </h4>
-                                    <p>46%</p>
+                                    <p>{currentData?.current.apparent_temperature}%</p>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h4>Humidity </h4>
-                                    <p>46%</p>
+                                    <p>{currentData?.current.relative_humidity_2m}%</p>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h4>Wind </h4>
-                                    <p>46%</p>
+                                    <p>{convertUnits('wind_speed', currentData?.current.wind_speed_10m ?? 0)} {currentUnits.windSpeedUnit}</p>
                                 </div>
                             </li>
                             <li>
                                 <div>
                                     <h4>Precipitation</h4>
-                                    <p>46%</p>
+                                    <p>{convertUnits('precipitation', currentData?.current.precipitation ?? 0)} {currentUnits.precipitationUnit}</p>
                                 </div>
                             </li>
                         </ul>
@@ -126,10 +134,10 @@ export const Main = () => {
                                         <img src={getStatusImg(currentData?.daily.weather_code[idx]!)} alt="status" />
                                         <div className="day-night">
                                             <span className="day">
-                                                {currentData?.daily.temperature_2m_max[idx]}
+                                                {convertUnits('temperature', currentData?.daily.temperature_2m_max[idx]!)}°
                                             </span>
                                             <span className="night">
-                                                {currentData?.daily.temperature_2m_min[idx]}
+                                                {convertUnits('temperature', currentData?.daily.temperature_2m_min[idx]!)}°
                                             </span>
                                         </div>
                                     </section>
@@ -156,14 +164,14 @@ export const Main = () => {
                         </div>
                     </div>
                     <ul className='hourly-temp'>
-                        {new Array(8).fill(0).map((item, index) => (
+                        {new Array(24).fill(0).map((item, index) => (
                             <li key={index}>
                                 <div className="hour-left">
-                                    <img src={getStatusImg(currentData?.hourly.weather_code[currentRightDay * 24 + index + 15]!)} alt="sunny" />
-                                    <span>{index + 3} PM</span>
+                                    <img src={getStatusImg(currentData?.hourly.weather_code[currentRightDay * 24 + index]!)} alt="sunny" />
+                                    <span>{index < 12 ? `${index} AM` : `${index - 12} PM`}</span>
                                 </div>
                                 <div className="hour-temp">
-                                    <span>{currentData?.hourly.apparent_temperature[currentRightDay * 24 + index + 15]}</span>
+                                    <span>{convertUnits('temperature', currentData?.hourly.apparent_temperature[currentRightDay * 24 + index] ?? 0)}°</span>
                                 </div>
                             </li>
                         ))}

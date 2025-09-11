@@ -7,7 +7,7 @@ declare global {
         timezone_abbreviation: string;
         elevation: number;
 
-        current_weather: ICurrentForecast;
+        current: ICurrentForecast;
         hourly: IHourlyForecast;
         daily: IDailyForecast;
     }
@@ -15,8 +15,11 @@ declare global {
     interface ICurrentForecast {
         time: Date;
         temperature: number;
-        windspeed: number;
+        wind_speed_10m: number;
         weathercode: number;
+        apparent_temperature: number;
+        precipitation: number;
+        relative_humidity_2m: number;
     }
 
     interface IHourlyForecast {

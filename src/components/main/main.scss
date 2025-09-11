@@ -88,7 +88,7 @@
                         p {
                             font-size: 2rem;
                             font-weight: 300;
-                            line-height: 100%;
+                            line-height: 2rem;
                         }
                     }
                 }
@@ -137,6 +137,22 @@
         padding: 1.5rem;
         border-radius: 1.25rem;
         background: var(--colors-neutral-800, #262540);
+        position: relative;
+
+        max-height: 40rem;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 0.25rem;
+            height: 16.375rem;
+            position: absolute;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 0.75rem;
+            border: 1px solid #3C3B5E;
+            background: #302F4A;
+        }
 
         .header {
             display: flex;
@@ -195,6 +211,7 @@
         }
 
         .hourly-temp {
+
             li {
                 display: flex;
                 justify-content: space-between;
