@@ -15,6 +15,25 @@ export type TCurrentUnits = {
     precipitationUnit: TPrecipitation;
 }
 
+export interface IUnitItem {
+    label: string,
+    unit: TWindSpeed[] | TTemperature[] | TPrecipitation[],
+}
+
+export const UnitsList: IUnitItem[] = [
+    {
+        label: 'Temperature',
+        unit: ['°C', '°F'],
+    },
+    {
+        label: 'Wind Speed',
+        unit: ['km/h', 'mph'],
+    },
+    {
+        label: 'precipitation',
+        unit: ['mm', 'in']
+    },
+]
 export const App = () => {
     const [currentUnits, setCurrentUntis] = useState<TCurrentUnits>({
         windSpeedUnit: 'km/h',
@@ -27,11 +46,11 @@ export const App = () => {
     const convertUnits = (units: TUnits, value: number): string => {
         switch (units) {
             case 'temperature':
-                return currentUnits.temperatureUnit == '°C' ? value.toString() : (value * 9 / 5 + 32).toFixed(1);
+                return currentUnits.temperatureUnit == '°C' ? value.toFixed(0) : (value * 9 / 5 + 32).toFixed(0);
             case 'precipitation':
-                return currentUnits.precipitationUnit == 'mm' ? value.toString() : (value / 25.4).toFixed(1);
+                return currentUnits.precipitationUnit == 'mm' ? value.toFixed(0) : (value / 25.4).toFixed(0);
             case 'wind_speed':
-                return currentUnits.windSpeedUnit == 'km/h' ? value.toString() : (value * 0.621371).toFixed(1);
+                return currentUnits.windSpeedUnit == 'km/h' ? value.toFixed(0) : (value * 0.621371).toFixed(0);
         }
     }
 

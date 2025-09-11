@@ -14,15 +14,16 @@ declare global {
 
     interface ICurrentForecast {
         time: Date;
-        temperature: number;
+        temperature_2m: number;
         wind_speed_10m: number;
-        weathercode: number;
+        weather_code: number;
         apparent_temperature: number;
         precipitation: number;
         relative_humidity_2m: number;
     }
 
     interface IHourlyForecast {
+        temperature_2m: number[];
         apparent_temperature: number[];
         precipitation: number[];
         relativehumidity_2m: number[];

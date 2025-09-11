@@ -30,15 +30,12 @@ export const Main = (props: IProps) => {
     const { currentUnits, convertUnits } = props;
 
     const weatherIcons: Record<number, string> = {
-        0: sunny,                // Clear sky
-        1: sunny,                // Mainly clear
-        2: partly_cloudy,        // Partly cloudy
-        3: overcast,             // Overcast
-        45: fog, 48: fog,        // Fog
-        51: dirzzle, 53: dirzzle, 55: dirzzle, // Drizzle
-        61: rain, 63: rain, 65: rain,          // Rain
-        71: snow, 73: snow, 75: snow,          // Snow
-        95: storm, 96: storm, 99: storm        // Thunderstorms
+        0: overcast, 1: partly_cloudy, 2: partly_cloudy, 3: partly_cloudy,
+        45: fog, 48: fog,
+        51: dirzzle, 53: dirzzle, 55: dirzzle,
+        61: rain, 63: rain, 65: rain,
+        71: snow, 73: snow, 75: snow,
+        95: storm, 96: storm, 99: storm
     };
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", 'Saturday', 'Friday', 'Sunday'];
@@ -63,7 +60,7 @@ export const Main = (props: IProps) => {
     }, [])
 
     const getStatusImg = (code: number) => {
-        return weatherIcons[code] ?? sunny; // fallback
+        return weatherIcons[code] ?? overcast; // fallback
     };
 
     const onChangeRightDay = (day: string) => {
@@ -89,8 +86,8 @@ export const Main = (props: IProps) => {
                                 <p className="date">{currentDay}, Aug 5, 2025</p>
                             </div>
                             <div className="body-right">
-                                <img src={sunny} alt="sunny" />
-                                <span>68°</span>
+                                <img src={getStatusImg(currentData?.current.weather_code ?? 0)} alt="sunny" />
+                                <span>{convertUnits('temperature', currentData?.current.temperature_2m ?? 0)}°</span>
                             </div>
                         </div>
                     </div>
@@ -100,7 +97,7 @@ export const Main = (props: IProps) => {
                             <li>
                                 <div>
                                     <h4>Feels Like </h4>
-                                    <p>{currentData?.current.apparent_temperature}%</p>
+                                    <p>{convertUnits('temperature', currentData?.current.apparent_temperature ?? 0)}°</p>
                                 </div>
                             </li>
                             <li>
@@ -171,7 +168,7 @@ export const Main = (props: IProps) => {
                                     <span>{index < 12 ? `${index} AM` : `${index - 12} PM`}</span>
                                 </div>
                                 <div className="hour-temp">
-                                    <span>{convertUnits('temperature', currentData?.hourly.apparent_temperature[currentRightDay * 24 + index] ?? 0)}°</span>
+                                    <span>{convertUnits('temperature', currentData?.hourly.temperature_2m[currentRightDay * 24 + index] ?? 0)}°</span>
                                 </div>
                             </li>
                         ))}
