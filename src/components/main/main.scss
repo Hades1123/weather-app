@@ -156,9 +156,9 @@
                     justify-content: space-between;
                     gap: .5rem;
                     padding: .5rem;
-                    background-color: var(--neutral-800);
-                    border-radius: 8px;
                     cursor: pointer;
+                    border-radius: 0.5rem;
+                    background: var(--colors-neutral-600, #3C3B5E);
                 }
 
                 .hourly-dropdown-menu {
@@ -166,6 +166,26 @@
                     top: 110%;
                     right: 0;
                     visibility: hidden;
+                    min-width: 13.375rem;
+                    padding: .5rem;
+                    z-index: 9999;
+                    border-radius: .75rem;
+                    border: 1px solid var(--colors-neutral-600, #3C3B5E);
+                    background: var(--colors-neutral-800, #262540);
+                    box-shadow: 0 8px 16px 0 rgba(2, 1, 44, 0.32);
+
+                    li {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 1.2rem;
+                        padding: .5rem;
+
+                        &:hover {
+                            cursor: pointer;
+                            border-radius: .5rem;
+                            background: var(--colors-neutral-700, #302F4A);
+                        }
+                    }
 
                     &.show {
                         visibility: visible;
